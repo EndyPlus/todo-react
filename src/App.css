@@ -1,0 +1,70 @@
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-brighter);
+}
+
+#header {
+  display: flex;
+  background-color: var(--main-color);
+}
+
+#header p {
+  margin: 1rem auto;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  color: var(--accent-color);
+}
+
+#header a {
+  color: var(--accent-brighter);
+}
+
+#header a:hover,
+#header a:active {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+main {
+  display: flex;
+
+  flex-grow: 1;
+
+  justify-content: center;
+}
+
+#todo {
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--main-darker);
+
+  border-radius: 0.5rem;
+
+  margin-top: 10vh;
+
+  width: 50vw;
+  height: 40vh;
+}
+
+.todo-navigation {
+  /* background-color: blue; */
+  display: flex;
+  padding: 2rem 0 1rem;
+
+  justify-content: space-around;
+}
+
+.todo-navigation li {
+  /* background-color: blue; */
+}
+
+.todo-navigation li button {
+  font-size: 1.2rem;
+  /* background-color: red; */
+  color: blue;
+  cursor: pointer;
+}
