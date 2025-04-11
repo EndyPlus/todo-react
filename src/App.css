@@ -19,6 +19,7 @@
 }
 
 #header a {
+  font-weight: 800;
   color: var(--accent-brighter);
 }
 
@@ -31,8 +32,6 @@
 main {
   display: flex;
 
-  flex-grow: 1;
-
   justify-content: center;
 }
 
@@ -40,31 +39,77 @@ main {
   display: flex;
   flex-direction: column;
 
-  background-color: var(--main-darker);
+  background-color: var(--main-color);
 
   border-radius: 0.5rem;
 
   margin-top: 10vh;
 
   width: 50vw;
-  height: 40vh;
 }
 
 .todo-navigation {
-  /* background-color: blue; */
   display: flex;
-  padding: 2rem 0 1rem;
+  padding: 2rem 0;
 
   justify-content: space-around;
-}
 
-.todo-navigation li {
-  /* background-color: blue; */
+  border-bottom: 0.1rem var(--accent-color) solid;
 }
 
 .todo-navigation li button {
   font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+
+  color: var(--accent-color);
+
+  background-color: var(--main-darker);
+
+  border: var(--default-border);
+  border-radius: 1rem;
+
+  cursor: pointer;
+  transition: var(--default-transition);
+}
+
+.todo-navigation li button:hover {
+  background-color: var(--main-brighter);
+  color: var(--accent-brighter);
+  border-color: var(--accent-color);
+}
+
+.todo-navigation li button:active {
+  background-color: var(--accent-darker);
+  color: var(--main-darker);
+  border-color: var(--accent-brighter);
+}
+
+.todo-container {
+  display: flex;
+  flex-grow: 1;
   /* background-color: red; */
-  color: blue;
+}
+
+.todo-container ul {
+  flex-grow: 1;
+}
+
+.list-item {
+  display: flex;
+  padding: 1rem;
+
+  border-bottom: var(--default-border);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.btn-control {
+  margin-left: auto;
+}
+
+.btn-control button {
   cursor: pointer;
 }

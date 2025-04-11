@@ -11,6 +11,8 @@
   --accent-brighter: #ba1bea;
   --main-darker: #212121;
   --accent-darker: #791199;
+  --default-transition: 0.2s ease-in-out;
+  --default-border: 0.1rem var(--accent-brighter) solid;
 }
 
 html,
