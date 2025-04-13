@@ -1,5 +1,5 @@
 #root {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--main-brighter);
@@ -43,7 +43,7 @@ main {
 
   border-radius: 0.5rem;
 
-  margin-top: 10vh;
+  margin: 10vh 0;
 
   width: 50vw;
 }
@@ -53,8 +53,27 @@ main {
   padding: 2rem 0;
 
   justify-content: space-around;
+  align-items: center;
 
   border-bottom: 0.1rem var(--accent-color) solid;
+}
+
+.fixed-item {
+  width: 33.33%;
+  display: flex;
+  justify-content: center;
+}
+
+.todo-navigation li h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+
+  color: var(--accent-color);
+}
+
+.todo-navigation li h3 span {
+  font-weight: 900;
+  color: var(--accent-brighter);
 }
 
 .todo-navigation li button {
@@ -99,11 +118,49 @@ main {
   display: flex;
   padding: 1rem;
 
-  border-bottom: var(--default-border);
+  background-color: var(--main-darker);
+  border-bottom: 0.1rem transparent solid;
+
+  transition: var(--default-transition);
+
+  align-items: end;
 }
 
 .list-item:last-child {
   border-bottom: none;
+}
+
+.list-item:hover {
+  background-color: var(--main-color);
+  border-bottom-color: var(--accent-brighter);
+}
+
+.list-item span {
+  margin-right: 1rem;
+
+  font-size: 1.3rem;
+  font-weight: 600;
+
+  color: var(--accent-brighter);
+}
+
+.list-item:hover span {
+  scale: 1.4;
+}
+
+.list-item p {
+  font-size: 1.1rem;
+
+  color: var(--accent-color);
+}
+
+.list-item:hover p {
+  color: var(--accent-brighter);
+}
+
+.complete {
+  text-decoration: line-through;
+  color: var(--accent-brighter) !important;
 }
 
 .btn-control {
@@ -111,5 +168,13 @@ main {
 }
 
 .btn-control button {
+  font-size: 1.5rem;
+
+  margin: 0 0.5rem;
+
   cursor: pointer;
+}
+
+.btn-control button:hover {
+  scale: 1.3;
 }
