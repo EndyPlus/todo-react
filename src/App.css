@@ -72,6 +72,7 @@ main {
 }
 
 .todo-navigation li h3 span {
+  font-size: 1.5rem;
   font-weight: 900;
   color: var(--accent-brighter);
 }
@@ -107,23 +108,24 @@ main {
 .todo-container {
   display: flex;
   flex-grow: 1;
-  /* background-color: red; */
 }
 
 .todo-container ul {
   flex-grow: 1;
+
+  max-width: 100%;
 }
 
 .list-item {
   display: flex;
+  align-items: end;
+
   padding: 1rem;
 
   background-color: var(--main-darker);
   border-bottom: 0.1rem transparent solid;
 
   transition: var(--default-transition);
-
-  align-items: end;
 }
 
 .list-item:last-child {
@@ -135,7 +137,16 @@ main {
   border-bottom-color: var(--accent-brighter);
 }
 
-.list-item span {
+.text-control {
+  display: flex;
+  flex-grow: 1;
+
+  max-width: 85%;
+
+  cursor: pointer;
+}
+
+.text-control span {
   margin-right: 1rem;
 
   font-size: 1.3rem;
@@ -144,17 +155,22 @@ main {
   color: var(--accent-brighter);
 }
 
-.list-item:hover span {
+.text-control:hover span {
   scale: 1.4;
 }
 
-.list-item p {
+.text-control p {
   font-size: 1.1rem;
 
   color: var(--accent-color);
+
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.list-item:hover p {
+.text-control:hover p {
+  font-size: 1.3rem;
   color: var(--accent-brighter);
 }
 

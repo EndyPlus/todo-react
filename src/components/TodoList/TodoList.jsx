@@ -7,6 +7,12 @@ const DUMMY_TASKS = [
   { id: "t2", taskTitle: "Some dummy task 2", isComplete: true },
   { id: "t3", taskTitle: "Some dummy task 3", isComplete: false },
   { id: "t4", taskTitle: "Some dummy task 4", isComplete: false },
+  {
+    id: "t5",
+    taskTitle:
+      "Some dummy task 5 Some dummy task 5 Some dummy task 5 Some dummy task 5 Some dummy task 5 Some dummy task 5 Some dummy task 5 Some dummy task 5 ",
+    isComplete: false,
+  },
 ];
 
 export default function TodoList() {

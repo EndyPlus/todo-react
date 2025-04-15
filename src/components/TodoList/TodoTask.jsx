@@ -19,10 +19,17 @@ export default function TodoTask({ index, task, setTasks }) {
     });
   }
 
+  function toggleExpanded() {
+    console.log("Expand");
+  }
+
   return (
     <li className="list-item">
-      <span>{index}</span>
-      <p className={task.isComplete ? "complete" : null}>{task.taskTitle}</p>
+      <div className="text-control" onClick={toggleExpanded}>
+        <span>{index}</span>
+
+        <p className={task.isComplete ? "complete" : null}>{task.taskTitle}</p>
+      </div>
       <div className="btn-control">
         <button onClick={deleteTask}>🗑️</button>
         <button onClick={toggleCompleteTask}>
