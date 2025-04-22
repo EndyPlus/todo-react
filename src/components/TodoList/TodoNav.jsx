@@ -1,19 +1,12 @@
+import { useRef } from "react";
 import numberToEmoji from "../../utils/numberToEmoji";
-import Modal from "../Modal";
+import NewTask from "./Modals/NewTask";
 
 export default function TodoNav({ taskList, setTasks }) {
-  function addTask() {
-    setTasks((prevState) => {
-      const randomId = Math.trunc(Math.random() * 100000);
-      return [
-        ...prevState,
-        {
-          id: randomId,
-          taskTitle: `Some dummy task ${randomId}`,
-          isComplete: false,
-        },
-      ];
-    });
+  const dialog = useRef();
+
+  function handleOpenModal() {
+    dialog.current.showModal();
   }
 
   function clearAllTasks() {
@@ -24,12 +17,10 @@ export default function TodoNav({ taskList, setTasks }) {
 
   return (
     <>
-      <Modal>
-        <p>Some Text</p>
-      </Modal>
+      <NewTask ref={dialog} setTasks={setTasks} />
       <nav className="todo-navigation">
         <li>
-          <button onClick={addTask}>Add Task</button>
+          <button onClick={handleOpenModal}>Add Task</button>
         </li>
         <li className="fixed-item">
           {uncompletedLength ? (

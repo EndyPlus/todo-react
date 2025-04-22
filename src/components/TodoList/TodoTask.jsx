@@ -1,4 +1,9 @@
+import { useRef } from "react";
+import TaskInfo from "./Modals/TaskInfo";
+
 export default function TodoTask({ index, task, setTasks }) {
+  const dialog = useRef();
+
   function toggleCompleteTask() {
     setTasks((prevList) => {
       return prevList.map((listItem) =>
@@ -21,21 +26,27 @@ export default function TodoTask({ index, task, setTasks }) {
 
   function toggleExpanded() {
     console.log("Expand");
+    dialog.current.showModal();
   }
 
   return (
-    <li className="list-item">
-      <div className="text-control" onClick={toggleExpanded}>
-        <span>{index}</span>
+    <>
+      <TaskInfo ref={dialog} data={task} />
+      <li className="list-item">
+        <div className="text-control" onClick={toggleExpanded}>
+          <span>{index}</span>
 
-        <p className={task.isComplete ? "complete" : null}>{task.taskTitle}</p>
-      </div>
-      <div className="btn-control">
-        <button onClick={deleteTask}>🗑️</button>
-        <button onClick={toggleCompleteTask}>
-          {task.isComplete ? "❌" : "✅"}
-        </button>
-      </div>
-    </li>
+          <p className={task.isComplete ? "complete" : null}>
+            {task.taskTitle}
+          </p>
+        </div>
+        <div className="btn-control">
+          <button onClick={deleteTask}>🗑️</button>
+          <button onClick={toggleCompleteTask}>
+            {task.isComplete ? "❌" : "✅"}
+          </button>
+        </div>
+      </li>
+    </>
   );
 }

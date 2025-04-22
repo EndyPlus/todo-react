@@ -89,7 +89,6 @@ main {
   border: var(--default-border);
   border-radius: 1rem;
 
-  cursor: pointer;
   transition: var(--default-transition);
 }
 
@@ -187,10 +186,61 @@ main {
   font-size: 1.5rem;
 
   margin: 0 0.5rem;
-
-  cursor: pointer;
 }
 
 .btn-control button:hover {
   scale: 1.3;
+}
+
+dialog {
+  justify-self: center;
+  align-self: center;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.add-task {
+  display: flex;
+  flex-direction: column;
+
+  width: 40vw;
+
+  background-color: var(--main-brighter);
+}
+
+.add-task__header {
+  display: flex;
+  padding: 0.4rem 1rem;
+
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.add-task__header h3 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--accent-brighter);
+}
+
+.add-task__header button {
+  font-size: 1.5rem;
+  color: var(--accent-brighter);
+}
+
+.add-task__header button:hover {
+  scale: 1.3;
+  color: var(--accent-color);
+}
+
+.add-task__main {
+  display: flex;
+  flex-direction: column;
+  border-top: 0.2rem var(--accent-brighter) solid;
+}
+
+.add-task__main form {
+  display: flex;
+  flex-direction: column;
 }
