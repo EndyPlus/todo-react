@@ -5,12 +5,22 @@
 }
 
 :root {
+  /* PROJECT COLORS */
   --main-color: #333333;
   --accent-color: #9a18c2;
   --main-brighter: #454545;
   --accent-brighter: #ba1bea;
   --main-darker: #212121;
   --accent-darker: #791199;
+  /* DIFFICULTY COLORS */
+  --low-difficult-color: #39ff14;
+  --medium-difficult-color: #fff01f;
+  --high-difficult-color: #ff3131;
+  /* BRIGHTER DIFFICULTY COLORS */
+  --low-difficult-brighter: #a2ff9e;
+  --medium-difficult-brighter: #ffaa00;
+  --high-difficult-brighter: #ff6b8b;
+  /* OTHER VARS */
   --default-transition: 0.2s ease-in-out;
   --default-border: 0.1rem var(--accent-brighter) solid;
 }

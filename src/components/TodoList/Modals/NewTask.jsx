@@ -1,4 +1,4 @@
-import Modal from "../../Modal";
+import Modal from "../../UI/Modal";
 
 export default function NewTask({ ref, setTasks }) {
   function closeModal() {
@@ -52,9 +52,14 @@ export default function NewTask({ ref, setTasks }) {
         <div className="add-task__main">
           <form id="test-form" onSubmit={submitForm}>
             <label>hfdsdsfdsaf</label>
-            <input name="TEST-NAME" type="text" placeholder="sdfjdsjfds" />
+            <input
+              name="TEST-NAME"
+              type="text"
+              placeholder="sdfjdsjfds"
+              required
+            />
             <label> sdokfdpsofdsfds</label>
-            <textarea name="test-desc" id="test" defaultValue="Task" />
+            <textarea name="test-desc" id="test" defaultValue="Task" required />
           </form>
           <button form="test-form">Add Task</button>
         </div>

@@ -117,11 +117,10 @@ main {
 
 .list-item {
   display: flex;
-  align-items: end;
-
-  padding: 1rem;
+  flex-direction: column;
 
   background-color: var(--main-darker);
+
   border-bottom: 0.1rem transparent solid;
 
   transition: var(--default-transition);
@@ -136,41 +135,61 @@ main {
   border-bottom-color: var(--accent-brighter);
 }
 
+.list-item--main {
+  display: flex;
+  align-items: center;
+}
+
+.list-item--main button {
+  display: flex;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border-radius: 100%;
+
+  margin: 1rem 0.5rem 1rem 1rem;
+
+  /* border: 0.2rem var(--low-difficult-color) solid; */
+  border: 0.2rem var(--accent-color) solid;
+}
+
+.btn-completed {
+  /* background-color: var(--low-difficult-color); */
+  border-color: var(--accent-brighter) !important;
+  background-color: var(--accent-brighter);
+}
+
 .text-control {
   display: flex;
   flex-grow: 1;
 
-  max-width: 85%;
+  padding: 1rem 0 1rem 1rem;
+
+  overflow: hidden;
 
   cursor: pointer;
-}
-
-.text-control span {
-  margin-right: 1rem;
-
-  font-size: 1.3rem;
-  font-weight: 600;
-
-  color: var(--accent-brighter);
-}
-
-.text-control:hover span {
-  scale: 1.4;
 }
 
 .text-control p {
   font-size: 1.1rem;
 
   color: var(--accent-color);
+  /* color: var(--high-difficult-color); */
 
+  overflow: inherit;
   text-wrap: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.text-control:hover p {
-  font-size: 1.3rem;
+.list-item:hover p {
   color: var(--accent-brighter);
+  /* color: #ff6b8b; */
+}
+
+.list-item--extended {
+  background-color: var(--main-color);
+  /* border-bottom: 2px red solid; */
 }
 
 .complete {
@@ -195,10 +214,12 @@ main {
 dialog {
   justify-self: center;
   align-self: center;
+
+  border: none;
 }
 
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .add-task {
