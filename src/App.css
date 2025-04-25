@@ -135,6 +135,11 @@ main {
   border-bottom-color: var(--accent-brighter);
 }
 
+.list-item .text-completed {
+  text-decoration: line-through;
+  color: var(--accent-brighter);
+}
+
 .list-item--main {
   display: flex;
   align-items: center;
@@ -154,9 +159,9 @@ main {
   border: 0.2rem var(--accent-color) solid;
 }
 
-.btn-completed {
+.list-item--main .btn-completed {
   /* background-color: var(--low-difficult-color); */
-  border-color: var(--accent-brighter) !important;
+  border-color: var(--accent-brighter);
   background-color: var(--accent-brighter);
 }
 
@@ -190,11 +195,6 @@ main {
 .list-item--extended {
   background-color: var(--main-color);
   /* border-bottom: 2px red solid; */
-}
-
-.complete {
-  text-decoration: line-through;
-  color: var(--accent-brighter) !important;
 }
 
 .btn-control {
