@@ -1,9 +1,22 @@
-import priorityFinder from "../../../utils/priorityFinder";
+import { useState } from "react";
 
-export default function TaskMain({ onToggleTask, onToggleExpand, task }) {
-  const { taskTitle, taskPriority, isComplete } = task;
+export default function TaskMain({
+  onToggleTask,
+  onToggleExpand,
+  priorityObj,
+  task,
+}) {
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
-  const priorityObj = priorityFinder(taskPriority);
+  const { taskTitle, isCompleted } = task;
+
+  function handleMouseOver() {
+    setIsMouseOver(true);
+  }
+
+  function handleMouseOut() {
+    setIsMouseOver(false);
+  }
 
   const styleBtn = {
     borderColor: priorityObj.priorityMain,
@@ -13,23 +26,31 @@ export default function TaskMain({ onToggleTask, onToggleExpand, task }) {
     color: priorityObj.priorityMain,
   };
 
-  if (isComplete) {
+  if (isCompleted) {
     styleBtn.borderColor = priorityObj.priorityBrighter;
     styleBtn.backgroundColor = priorityObj.priorityBrighter;
 
     styleText.color = priorityObj.priorityBrighter;
   }
 
+  if (isMouseOver) {
+    styleText.color = priorityObj.priorityBrighter;
+  }
+
   return (
-    <div className="list-item--main">
+    <div
+      className="list-item--main"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
       <button
-        className={task.isComplete ? "btn-completed" : null}
+        className={task.isCompleted ? "btn-completed" : null}
         style={styleBtn}
         onClick={onToggleTask}
       ></button>
       <div className="text-control" onClick={onToggleExpand}>
         <p
-          className={task.isComplete ? "text-completed" : null}
+          className={task.isCompleted ? "text-completed" : null}
           style={styleText}
         >
           {taskTitle}

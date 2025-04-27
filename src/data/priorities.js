@@ -1,5 +1,10 @@
 export const PRIORITIES = [
   {
+    priority: "none",
+    priorityMain: "",
+    priorityBrighter: "",
+  },
+  {
     priority: "low",
     priorityMain: "#39ff14", // --low-difficult-color
     priorityBrighter: "#a2ff9e", // --low-difficult-brighter

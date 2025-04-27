@@ -33,11 +33,6 @@ export default function TodoNav({ taskList, setTasks }) {
         </li>
         <li>
           <button onClick={clearAllTasks}>Clear All</button>
-          {/* <select name="" id="">
-            <option value="">Delete all</option>
-            <option value="">Delete all completed</option>
-            <option value="">Select to delete</option>
-          </select> */}
         </li>
       </nav>
     </>

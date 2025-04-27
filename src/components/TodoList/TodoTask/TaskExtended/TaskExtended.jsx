@@ -1,36 +1,39 @@
-// import { useState } from "react";
-import TaskEdit from "../../../UI/Modal";
-import TaskInfo from "../../../UI/Modal";
+import { useState } from "react";
+import TaskInfo from "./TaskInfo";
+import TaskEdit from "./TaskEdit";
 
-export default function TaskExtended({ onToggleExpand }) {
-  // const [isEditing, setIsEditing] = useState(false);
+export default function TaskExtended({
+  onToggleExpand,
+  onToggleTask,
+  onDeleteTask,
+  priorityObj,
+  task,
+}) {
+  const [isEditing, setIsEditing] = useState(false);
 
-  // function toggleEdit() {
-  //   setIsEditing((prevState) => !prevState);
-  // }
-
-  // function handleOpenEditing() {
-  //   ref.current.close();
-  //   // dialog.current.showModal();
-  // }
+  function toggleEdit() {
+    setIsEditing((prevState) => !prevState);
+  }
 
   return (
-    <>
-      <div className="list-item--extended">
-        <div>
-          {/* {isEditing && <TaskEdit />}
-          {!isEditing && <TaskInfo />} */}
-          {/* <button onClick={toggleEdit}>{isEditing ? "Edit" : "Return"}</button> */}
-        </div>
-        <div>
-          <button onClick={onToggleExpand}>Close</button>
-          <button>dsfdsfds</button>
-        </div>
-      </div>
-    </>
+    <div className="list-item--extended">
+      {!isEditing && (
+        <TaskInfo
+          data={task}
+          onToggleEdit={toggleEdit}
+          onToggleExpand={onToggleExpand}
+          onToggleTask={onToggleTask}
+          onDeleteTask={onDeleteTask}
+          priorityObj={priorityObj}
+        />
+      )}
+      {isEditing && (
+        <TaskEdit
+          data={task}
+          onToggleEdit={toggleEdit}
+          priorityObj={priorityObj}
+        />
+      )}
+    </div>
   );
 }
-
-// ❌
-
-// ✅

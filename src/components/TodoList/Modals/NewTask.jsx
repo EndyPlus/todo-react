@@ -9,14 +9,15 @@ export default function NewTask({ ref, setTasks }) {
     console.log(data);
     setTasks((prevState) => {
       const randomId = Math.trunc(Math.random() * 100000);
-      const { testName: title, testDesc } = data;
+      const { testName: title, testDesc, priority } = data;
       return [
         ...prevState,
         {
           id: randomId,
           taskTitle: title,
           taskDescription: testDesc,
-          isComplete: false,
+          taskPriority: priority,
+          isCompleted: false,
         },
       ];
     });
@@ -32,11 +33,11 @@ export default function NewTask({ ref, setTasks }) {
 
     const testDesc = formData.get("test-desc");
 
-    console.log(testName, testDesc);
+    const priority = "none";
 
     console.log("Submit");
 
-    addTask({ testName, testDesc });
+    addTask({ testName, testDesc, priority });
 
     e.target.reset();
   }
