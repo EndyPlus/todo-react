@@ -8,12 +8,13 @@ export default function NewTask({ ref, setTasks }) {
   function addTask(data) {
     console.log(data);
     setTasks((prevState) => {
-      const randomId = Math.trunc(Math.random() * 100000);
+      const randomId = crypto.randomUUID();
+
       const { testName: title, testDesc, priority } = data;
       return [
         ...prevState,
         {
-          id: randomId,
+          taskId: randomId,
           taskTitle: title,
           taskDescription: testDesc,
           taskPriority: priority,

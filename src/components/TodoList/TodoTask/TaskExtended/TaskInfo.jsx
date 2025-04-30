@@ -18,6 +18,7 @@ export default function TaskInfo({
       <h2
         style={{ color: priorityObj.priorityBrighter }}
         className={data.isCompleted ? "text-completed" : null}
+        onClick={onToggleExpand}
       >
         {data.taskTitle}
       </h2>

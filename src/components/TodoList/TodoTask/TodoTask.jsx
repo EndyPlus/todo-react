@@ -11,7 +11,7 @@ export default function TodoTask({ task, setTasks }) {
   function toggleCompleteTask() {
     setTasks((prevList) => {
       return prevList.map((listItem) =>
-        listItem.id === task.id
+        listItem.taskId === task.taskId
           ? { ...listItem, isCompleted: !listItem.isCompleted }
           : listItem
       );
@@ -21,7 +21,7 @@ export default function TodoTask({ task, setTasks }) {
   function deleteTask() {
     setTasks((prevList) => {
       const filteredList = prevList.filter(
-        (listTask) => listTask.id !== task.id
+        (listTask) => listTask.taskId !== task.taskId
       );
 
       return filteredList;
@@ -29,8 +29,16 @@ export default function TodoTask({ task, setTasks }) {
   }
 
   function toggleExpanded() {
-    console.log("Expand");
+    // console.log("Expand");
     setIsExpanded((prevState) => !prevState);
+  }
+
+  function editTask(newTaskData) {
+    setTasks((prevList) => {
+      return prevList.map((listItem) =>
+        listItem.taskId === newTaskData.taskId ? { ...newTaskData } : listItem
+      );
+    });
   }
 
   return (
@@ -51,6 +59,7 @@ export default function TodoTask({ task, setTasks }) {
           onToggleExpand={toggleExpanded}
           onToggleTask={toggleCompleteTask}
           onDeleteTask={deleteTask}
+          onEditTask={editTask}
           priorityObj={priorityObj}
         />
       )}

@@ -6,6 +6,7 @@ export default function TaskExtended({
   onToggleExpand,
   onToggleTask,
   onDeleteTask,
+  onEditTask,
   priorityObj,
   task,
 }) {
@@ -31,6 +32,7 @@ export default function TaskExtended({
         <TaskEdit
           data={task}
           onToggleEdit={toggleEdit}
+          onEditTask={onEditTask}
           priorityObj={priorityObj}
         />
       )}

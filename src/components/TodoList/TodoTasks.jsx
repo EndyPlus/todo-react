@@ -5,7 +5,7 @@ export default function TodoTasks({ taskList, setTasks }) {
     <div className="todo-container">
       <ul>
         {taskList.map((task) => (
-          <TodoTask key={task.id} task={task} setTasks={setTasks} />
+          <TodoTask key={task.taskId} task={task} setTasks={setTasks} />
         ))}
       </ul>
     </div>

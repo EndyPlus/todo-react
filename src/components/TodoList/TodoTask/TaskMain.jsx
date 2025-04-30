@@ -43,6 +43,8 @@ export default function TaskMain({
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
+      {/* FOR SELECT TO DELETE */}
+      {/* <button style={styleBtn}></button> */}
       <button
         className={task.isCompleted ? "btn-completed" : null}
         style={styleBtn}
