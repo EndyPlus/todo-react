@@ -1,4 +1,4 @@
-import Modal from "../../UI/Modal";
+import Modal from "../UI/Modal";
 
 export default function NewTask({ ref, setTasks }) {
   function closeModal() {
@@ -6,13 +6,12 @@ export default function NewTask({ ref, setTasks }) {
   }
 
   function addTask(data) {
-    console.log(data);
+    // console.log(data);
     setTasks((prevState) => {
       const randomId = crypto.randomUUID();
 
       const { testName: title, testDesc, priority } = data;
       return [
-        ...prevState,
         {
           taskId: randomId,
           taskTitle: title,
@@ -20,6 +19,7 @@ export default function NewTask({ ref, setTasks }) {
           taskPriority: priority,
           isCompleted: false,
         },
+        ...prevState,
       ];
     });
     closeModal();
