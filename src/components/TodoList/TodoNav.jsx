@@ -19,6 +19,12 @@ export default function TodoNav({ setTasks }) {
         <li>
           <button onClick={handleOpenModal}>Add Task</button>
         </li>
+        {/* <li>
+          <button onClick={clearAllTasks}>Select to delete</button>
+        </li>
+        <li>
+          <button onClick={clearAllTasks}>Clear All finished</button>
+        </li> */}
         <li>
           <button onClick={clearAllTasks}>Clear All</button>
         </li>

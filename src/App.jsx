@@ -12,3 +12,12 @@ export default function App() {
     </>
   );
 }
+
+/*
+TODO: 
+1) navigation delete btns;
+2) use RTK;
+3) make ability to create own priorities;
+4) change & polish styles everywhere it possible/needble;
+5) adaptive layout;
+*/

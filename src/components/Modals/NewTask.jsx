@@ -1,22 +1,27 @@
 import Modal from "../UI/Modal";
+import NewTaskRadioBtn from "../UI/NewTaskRadioBtn";
+import { PRIORITIES } from "../../data/priorities";
+import { useState } from "react";
 
 export default function NewTask({ ref, setTasks }) {
+  const [checkedBox, setCheckedBox] = useState(PRIORITIES[0].priorityId);
+
   function closeModal() {
     ref.current.close();
   }
 
   function addTask(data) {
-    // console.log(data);
     setTasks((prevState) => {
       const randomId = crypto.randomUUID();
 
-      const { testName: title, testDesc, priority } = data;
+      const { taskTitle, taskDescription, taskPriority } = data;
+
       return [
         {
           taskId: randomId,
-          taskTitle: title,
-          taskDescription: testDesc,
-          taskPriority: priority,
+          taskTitle,
+          taskDescription,
+          taskPriority,
           isCompleted: false,
         },
         ...prevState,
@@ -30,15 +35,15 @@ export default function NewTask({ ref, setTasks }) {
 
     const formData = new FormData(e.target);
 
-    const testName = formData.get("TEST-NAME");
+    const taskTitle = formData.get("taskTitle");
 
-    const testDesc = formData.get("test-desc");
+    const taskDescription = formData.get("taskDescription");
 
-    const priority = "none";
+    const taskPriority = formData.get("newTaskPriority");
 
-    console.log("Submit");
+    // console.log(Object.fromEntries(formData.entries()));
 
-    addTask({ testName, testDesc, priority });
+    addTask({ taskTitle, taskDescription, taskPriority });
 
     e.target.reset();
   }
@@ -47,23 +52,45 @@ export default function NewTask({ ref, setTasks }) {
     <Modal ref={ref}>
       <div className="add-task">
         <div className="add-task__header">
-          <span></span>
-          <h3>Add Task</h3>
-          <button onClick={closeModal}>&#x2716;</button>
+          <h3>Create new task</h3>
         </div>
         <div className="add-task__main">
-          <form id="test-form" onSubmit={submitForm}>
-            <label>hfdsdsfdsaf</label>
+          <form id="add-task-form" onSubmit={submitForm}>
+            <label htmlFor="taskTitle">Enter task name:</label>
             <input
-              name="TEST-NAME"
+              name="taskTitle"
+              id="taskTitle"
               type="text"
-              placeholder="sdfjdsjfds"
+              placeholder="Write a title for your task."
               required
             />
-            <label> sdokfdpsofdsfds</label>
-            <textarea name="test-desc" id="test" defaultValue="Task" required />
+            <label htmlFor="taskDescription">Enter description:</label>
+            <textarea
+              name="taskDescription"
+              id="taskDescription"
+              placeholder="Describe your task. "
+              required
+            />
+            <h3>Select priority:</h3>
+            <ul>
+              {PRIORITIES.map((priority) => {
+                return (
+                  <NewTaskRadioBtn
+                    key={priority.priorityId}
+                    priorityData={priority}
+                    isChecked={priority.priorityId === checkedBox}
+                    onCheckedBox={setCheckedBox}
+                  />
+                );
+              })}
+            </ul>
+            <div className="add-task__controls">
+              <button onClick={closeModal}>Cancel</button>
+              <button type="submit" form="add-task-form">
+                Confirm
+              </button>
+            </div>
           </form>
-          <button form="test-form">Add Task</button>
         </div>
       </div>
     </Modal>
