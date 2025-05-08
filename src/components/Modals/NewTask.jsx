@@ -1,32 +1,31 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import Modal from "../UI/Modal";
 import NewTaskRadioBtn from "../UI/NewTaskRadioBtn";
 import { PRIORITIES } from "../../data/priorities";
-import { useState } from "react";
 
-export default function NewTask({ ref, setTasks }) {
+import { addTask } from "../../store/tasksListSlice";
+
+export default function NewTask({ ref }) {
+  const dispatch = useDispatch();
+
   const [checkedBox, setCheckedBox] = useState(PRIORITIES[0].priorityId);
 
   function closeModal() {
     ref.current.close();
   }
 
-  function addTask(data) {
-    setTasks((prevState) => {
-      const randomId = crypto.randomUUID();
+  function addNewTask(data) {
+    const isComplete = false;
+    const randomId = crypto.randomUUID();
 
-      const { taskTitle, taskDescription, taskPriority } = data;
+    const newTask = { ...data, taskId: randomId, isComplete };
 
-      return [
-        {
-          taskId: randomId,
-          taskTitle,
-          taskDescription,
-          taskPriority,
-          isCompleted: false,
-        },
-        ...prevState,
-      ];
-    });
+    // console.log(newTask);
+
+    dispatch(addTask(newTask));
+
     closeModal();
   }
 
@@ -41,9 +40,7 @@ export default function NewTask({ ref, setTasks }) {
 
     const taskPriority = formData.get("newTaskPriority");
 
-    // console.log(Object.fromEntries(formData.entries()));
-
-    addTask({ taskTitle, taskDescription, taskPriority });
+    addNewTask({ taskTitle, taskDescription, taskPriority });
 
     e.target.reset();
   }

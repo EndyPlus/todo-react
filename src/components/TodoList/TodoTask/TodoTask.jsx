@@ -3,53 +3,23 @@ import TaskExtended from "./TaskExtended/TaskExtended";
 import TaskMain from "./TaskMain";
 import priorityFinder from "../../../utils/priorityFinder";
 
-export default function TodoTask({ task, setTasks }) {
+export default function TodoTask({ task }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const priorityObj = priorityFinder(task.taskPriority);
 
-  function toggleCompleteTask() {
-    setTasks((prevList) => {
-      return prevList.map((listItem) =>
-        listItem.taskId === task.taskId
-          ? { ...listItem, isCompleted: !listItem.isCompleted }
-          : listItem
-      );
-    });
-  }
-
-  function deleteTask() {
-    setTasks((prevList) => {
-      const filteredList = prevList.filter(
-        (listTask) => listTask.taskId !== task.taskId
-      );
-
-      return filteredList;
-    });
-  }
-
   function toggleExpanded() {
-    // console.log("Expand");
     setIsExpanded((prevState) => !prevState);
-  }
-
-  function editTask(newTaskData) {
-    setTasks((prevList) => {
-      return prevList.map((listItem) =>
-        listItem.taskId === newTaskData.taskId ? { ...newTaskData } : listItem
-      );
-    });
   }
 
   return (
     <li className="list-item">
       {!isExpanded && (
         <TaskMain
-          onToggleTask={toggleCompleteTask}
-          onDeleteTask={deleteTask}
           onToggleExpand={toggleExpanded}
           task={task}
           priorityObj={priorityObj}
+          // selectDelete={selectDelete}
         />
       )}
 
@@ -57,9 +27,6 @@ export default function TodoTask({ task, setTasks }) {
         <TaskExtended
           task={task}
           onToggleExpand={toggleExpanded}
-          onToggleTask={toggleCompleteTask}
-          onDeleteTask={deleteTask}
-          onEditTask={editTask}
           priorityObj={priorityObj}
         />
       )}

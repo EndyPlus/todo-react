@@ -2,13 +2,12 @@ import { useState } from "react";
 import { PRIORITIES } from "../../../../data/priorities";
 import RadioButton from "../../../UI/RadioButton";
 import TaskButton from "../../../UI/TaskButton";
+import { useDispatch } from "react-redux";
+import { editTask } from "../../../../store/tasksListSlice";
 
-export default function EditTask({
-  data,
-  onToggleEdit,
-  onEditTask,
-  priorityObj,
-}) {
+export default function EditTask({ data, onToggleEdit, priorityObj }) {
+  const dispatch = useDispatch();
+
   const { taskId, taskTitle, taskDescription, taskPriority } = data;
 
   const [checkedBox, setCheckedBox] = useState(taskPriority);
@@ -31,9 +30,7 @@ export default function EditTask({
       taskPriority: newTaskPriority,
     };
 
-    // console.log(newDataObj);
-
-    onEditTask(newDataObj);
+    dispatch(editTask(newDataObj));
     onToggleEdit();
   }
 

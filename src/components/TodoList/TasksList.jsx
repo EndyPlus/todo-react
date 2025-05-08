@@ -1,7 +1,7 @@
 import TodoTask from "./TodoTask/TodoTask";
 import numberToEmoji from "../../utils/numberToEmoji";
 
-export default function TasksList({ title, taskList, setTasks }) {
+export default function TasksList({ title, taskList }) {
   return (
     <div>
       <h2 className="list-heading">{`${title}: ${numberToEmoji(
@@ -9,7 +9,7 @@ export default function TasksList({ title, taskList, setTasks }) {
       )}`}</h2>
       <ul>
         {taskList.map((task) => (
-          <TodoTask key={task.taskId} task={task} setTasks={setTasks} />
+          <TodoTask key={task.taskId} task={task} />
         ))}
       </ul>
     </div>

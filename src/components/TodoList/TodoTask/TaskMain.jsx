@@ -1,14 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toggleCompleteTask } from "../../../store/tasksListSlice";
 
-export default function TaskMain({
-  onToggleTask,
-  onToggleExpand,
-  priorityObj,
-  task,
-}) {
+export default function TaskMain({ onToggleExpand, priorityObj, task }) {
+  const dispatch = useDispatch();
+
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  const { taskTitle, isCompleted } = task;
+  const { taskTitle, isCompleted, taskId } = task;
 
   function handleMouseOver() {
     setIsMouseOver(true);
@@ -44,11 +43,12 @@ export default function TaskMain({
       onMouseOut={handleMouseOut}
     >
       {/* FOR SELECT TO DELETE */}
-      {/* <button style={styleBtn}></button> */}
+      {/* {selectDelete && <button style={styleBtn}></button>} */}
+
       <button
         className={task.isCompleted ? "btn-completed" : null}
         style={styleBtn}
-        onClick={onToggleTask}
+        onClick={() => dispatch(toggleCompleteTask(taskId))}
       ></button>
       <div className="text-control" onClick={onToggleExpand}>
         <p

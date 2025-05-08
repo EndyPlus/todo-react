@@ -1,34 +1,52 @@
 import { useRef } from "react";
-import NewTask from "../Modals/NewTask";
+import { useDispatch } from "react-redux";
 
-export default function TodoNav({ setTasks }) {
+import NewTask from "../Modals/NewTask";
+import {
+  clearAllTasks,
+  clearAllCompletedTasks,
+} from "../../store/tasksListSlice";
+
+export default function TodoNav() {
+  const dispatch = useDispatch();
+
   const dialog = useRef();
 
   function handleOpenModal() {
     dialog.current.showModal();
   }
 
-  function clearAllTasks() {
-    setTasks(() => []);
-  }
-
   return (
     <>
-      <NewTask ref={dialog} setTasks={setTasks} />
+      <NewTask ref={dialog} />
+
+      {/* {!selectDelete && ( */}
       <nav className="todo-navigation">
         <li>
           <button onClick={handleOpenModal}>Add Task</button>
         </li>
-        {/* <li>
-          <button onClick={clearAllTasks}>Select to delete</button>
+        <li>
+          <button onClick={() => console.log("toggleSelectDelete")}>
+            Select to delete
+          </button>
         </li>
         <li>
-          <button onClick={clearAllTasks}>Clear All finished</button>
-        </li> */}
+          <button onClick={() => dispatch(clearAllCompletedTasks())}>
+            Clear All finished
+          </button>
+        </li>
         <li>
-          <button onClick={clearAllTasks}>Clear All</button>
+          <button onClick={() => dispatch(clearAllTasks())}>Clear All</button>
         </li>
       </nav>
+      {/* )} */}
+
+      {/* {selectDelete && (
+        <form>
+          <button onClick={toggleSelectDelete}>Cancel</button>
+          <button>Delete</button>
+        </form>
+      )} */}
     </>
   );
 }

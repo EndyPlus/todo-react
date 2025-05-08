@@ -2,14 +2,7 @@ import { useState } from "react";
 import TaskInfo from "./TaskInfo";
 import TaskEdit from "./TaskEdit";
 
-export default function TaskExtended({
-  onToggleExpand,
-  onToggleTask,
-  onDeleteTask,
-  onEditTask,
-  priorityObj,
-  task,
-}) {
+export default function TaskExtended({ onToggleExpand, priorityObj, task }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function toggleEdit() {
@@ -23,8 +16,6 @@ export default function TaskExtended({
           data={task}
           onToggleEdit={toggleEdit}
           onToggleExpand={onToggleExpand}
-          onToggleTask={onToggleTask}
-          onDeleteTask={onDeleteTask}
           priorityObj={priorityObj}
         />
       )}
@@ -32,7 +23,6 @@ export default function TaskExtended({
         <TaskEdit
           data={task}
           onToggleEdit={toggleEdit}
-          onEditTask={onEditTask}
           priorityObj={priorityObj}
         />
       )}

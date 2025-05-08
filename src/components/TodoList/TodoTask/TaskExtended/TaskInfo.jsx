@@ -1,17 +1,24 @@
+import { useDispatch } from "react-redux";
+import {
+  deleteTask,
+  toggleCompleteTask,
+} from "../../../../store/tasksListSlice";
 import TaskButton from "../../../UI/TaskButton";
 
 export default function TaskInfo({
   data,
   onToggleEdit,
   onToggleExpand,
-  onToggleTask,
-  onDeleteTask,
+  // onToggleTask,
+  // onDeleteTask,
   priorityObj,
 }) {
-  const { taskTitle, taskDescription, isCompleted } = data;
+  const dispatch = useDispatch();
+
+  const { taskTitle, taskDescription, isCompleted, taskId } = data;
 
   function handleComplete() {
-    onToggleTask();
+    dispatch(toggleCompleteTask(taskId));
     onToggleExpand();
   }
 
@@ -47,7 +54,10 @@ export default function TaskInfo({
         <TaskButton onClick={onToggleExpand} priorityObj={priorityObj}>
           ❌
         </TaskButton>
-        <TaskButton onClick={onDeleteTask} priorityObj={priorityObj}>
+        <TaskButton
+          onClick={() => dispatch(deleteTask(taskId))}
+          priorityObj={priorityObj}
+        >
           🗑️
         </TaskButton>
         {!isCompleted && (
