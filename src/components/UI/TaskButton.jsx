@@ -1,6 +1,9 @@
-export default function TaskButton({ children, priorityObj, ...props }) {
+export default function TaskButton({ children, priority, ...props }) {
   return (
-    <button {...props} style={{ borderColor: priorityObj.priorityMain }}>
+    <button
+      {...props}
+      className={`extended-controls__button extended-controls__button--${priority}`}
+    >
       {children}
     </button>
   );

@@ -1,62 +1,30 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleCompleteTask } from "../../../store/tasksListSlice";
 
-export default function TaskMain({ onToggleExpand, priorityObj, task }) {
+export default function TaskMain({ onToggleExpand, task }) {
   const dispatch = useDispatch();
 
-  const [isMouseOver, setIsMouseOver] = useState(false);
+  const { taskTitle, isCompleted, taskId, taskPriority } = task;
 
-  const { taskTitle, isCompleted, taskId } = task;
-
-  function handleMouseOver() {
-    setIsMouseOver(true);
-  }
-
-  function handleMouseOut() {
-    setIsMouseOver(false);
-  }
-
-  const styleBtn = {
-    borderColor: priorityObj.priorityMain,
-  };
-
-  const styleText = {
-    color: priorityObj.priorityMain,
-  };
+  let taskBtn = `btn-uncompleted--${taskPriority}`;
+  let taskDesc = `text-uncompleted--${taskPriority}`;
 
   if (isCompleted) {
-    styleBtn.borderColor = priorityObj.priorityBrighter;
-    styleBtn.backgroundColor = priorityObj.priorityBrighter;
-
-    styleText.color = priorityObj.priorityBrighter;
-  }
-
-  if (isMouseOver) {
-    styleText.color = priorityObj.priorityBrighter;
+    taskBtn = `btn-completed--${taskPriority}`;
+    taskDesc = `text-completed text-completed--${taskPriority}`;
   }
 
   return (
-    <div
-      className="list-item--main"
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
-    >
+    <div className="list-item--main">
       {/* FOR SELECT TO DELETE */}
       {/* {selectDelete && <button style={styleBtn}></button>} */}
 
       <button
-        className={task.isCompleted ? "btn-completed" : null}
-        style={styleBtn}
+        className={taskBtn}
         onClick={() => dispatch(toggleCompleteTask(taskId))}
       ></button>
       <div className="text-control" onClick={onToggleExpand}>
-        <p
-          className={task.isCompleted ? "text-completed" : null}
-          style={styleText}
-        >
-          {taskTitle}
-        </p>
+        <p className={taskDesc}>{taskTitle}</p>
       </div>
     </div>
   );

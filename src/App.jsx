@@ -15,9 +15,7 @@ export default function App() {
 
 /*
 TODO: 
-1) navigation delete btns;
-2) use RTK;
-3) make ability to create own priorities;
-4) change & polish styles everywhere it possible/needble;
-5) adaptive layout;
+1) Update navigation;
+2) Change & polish styles everywhere it possible/needble;
+3) Adaptive layout;
 */

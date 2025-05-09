@@ -5,67 +5,63 @@ import {
 } from "../../../../store/tasksListSlice";
 import TaskButton from "../../../UI/TaskButton";
 
-export default function TaskInfo({
-  data,
-  onToggleEdit,
-  onToggleExpand,
-  // onToggleTask,
-  // onDeleteTask,
-  priorityObj,
-}) {
+export default function TaskInfo({ data, onToggleEdit, onToggleExpand }) {
   const dispatch = useDispatch();
 
-  const { taskTitle, taskDescription, isCompleted, taskId } = data;
+  const { taskTitle, taskDescription, isCompleted, taskId, taskPriority } =
+    data;
 
   function handleComplete() {
     dispatch(toggleCompleteTask(taskId));
     onToggleExpand();
   }
 
+  let extendedInfoHeading = `extended-info__heading--${taskPriority}`;
+  let statusSpan = `extended-info__span`;
+
+  if (isCompleted) {
+    extendedInfoHeading += " text-completed";
+    statusSpan += ` extended-info__span-completed--${taskPriority}`;
+  } else {
+    statusSpan += ` extended-info__span--${taskPriority}`;
+  }
+
   return (
     <div className="extended-info">
-      <h2
-        style={{ color: priorityObj.priorityBrighter }}
-        className={isCompleted ? "text-completed" : null}
-        onClick={onToggleExpand}
-      >
+      <h2 className={extendedInfoHeading} onClick={onToggleExpand}>
         {taskTitle}
       </h2>
       <h3>
         Priority:{" "}
-        <span style={{ color: priorityObj.priorityMain }}>
-          {priorityObj.priority}
+        <span
+          className={`extended-info__span extended-info__span--${taskPriority}`}
+        >
+          {taskPriority}
         </span>
       </h3>
       <h3>
         Status:{" "}
-        <span
-          style={
-            isCompleted
-              ? { color: priorityObj.priorityBrighter }
-              : { color: priorityObj.priorityMain }
-          }
-        >
+        <span className={statusSpan}>
           {isCompleted ? "Completed" : "Uncompleted"}
         </span>
       </h3>
       <p>{taskDescription}</p>
       <div className="extended-controls">
-        <TaskButton onClick={onToggleExpand} priorityObj={priorityObj}>
+        <TaskButton onClick={onToggleExpand} priority={taskPriority}>
           ❌
         </TaskButton>
         <TaskButton
           onClick={() => dispatch(deleteTask(taskId))}
-          priorityObj={priorityObj}
+          priority={taskPriority}
         >
           🗑️
         </TaskButton>
         {!isCompleted && (
-          <TaskButton onClick={onToggleEdit} priorityObj={priorityObj}>
+          <TaskButton onClick={onToggleEdit} priority={taskPriority}>
             ✏️
           </TaskButton>
         )}
-        <TaskButton onClick={handleComplete} priorityObj={priorityObj}>
+        <TaskButton onClick={handleComplete} priority={taskPriority}>
           {isCompleted ? "❎" : "✅"}
         </TaskButton>
       </div>

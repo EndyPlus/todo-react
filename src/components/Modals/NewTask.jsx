@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Modal from "../UI/Modal";
-import NewTaskRadioBtn from "../UI/NewTaskRadioBtn";
-import { PRIORITIES } from "../../data/priorities";
+import RadioCard from "../UI/RadioCard";
 
 import { addTask } from "../../store/tasksListSlice";
+import { PRIORITIES } from "../../data/priorities";
 
 export default function NewTask({ ref }) {
   const dispatch = useDispatch();
 
-  const [checkedBox, setCheckedBox] = useState(PRIORITIES[0].priorityId);
+  const [checkedRadio, setCheckedRadio] = useState("none");
 
   function closeModal() {
     ref.current.close();
@@ -21,8 +21,6 @@ export default function NewTask({ ref }) {
     const randomId = crypto.randomUUID();
 
     const newTask = { ...data, taskId: randomId, isComplete };
-
-    // console.log(newTask);
 
     dispatch(addTask(newTask));
 
@@ -58,25 +56,25 @@ export default function NewTask({ ref }) {
               name="taskTitle"
               id="taskTitle"
               type="text"
-              placeholder="Write a title for your task."
+              placeholder="Write a title for your task..."
               required
             />
             <label htmlFor="taskDescription">Enter description:</label>
             <textarea
               name="taskDescription"
               id="taskDescription"
-              placeholder="Describe your task. "
+              placeholder="Describe your task..."
               required
             />
             <h3>Select priority:</h3>
             <ul>
               {PRIORITIES.map((priority) => {
                 return (
-                  <NewTaskRadioBtn
-                    key={priority.priorityId}
-                    priorityData={priority}
-                    isChecked={priority.priorityId === checkedBox}
-                    onCheckedBox={setCheckedBox}
+                  <RadioCard
+                    key={priority}
+                    priorityName={priority}
+                    isChecked={checkedRadio === "none"}
+                    onCheckedRadio={setCheckedRadio}
                   />
                 );
               })}

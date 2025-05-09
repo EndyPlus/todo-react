@@ -5,7 +5,7 @@ import TaskButton from "../../../UI/TaskButton";
 import { useDispatch } from "react-redux";
 import { editTask } from "../../../../store/tasksListSlice";
 
-export default function EditTask({ data, onToggleEdit, priorityObj }) {
+export default function EditTask({ data, onToggleEdit }) {
   const dispatch = useDispatch();
 
   const { taskId, taskTitle, taskDescription, taskPriority } = data;
@@ -63,20 +63,20 @@ export default function EditTask({ data, onToggleEdit, priorityObj }) {
         <div className="edit-form__radio-btns">
           {PRIORITIES.map((priority) => (
             <RadioButton
-              key={`${taskId}-${priority.priority}`}
+              key={`${taskId}-${priority}`}
               taskId={taskId}
-              priorityData={priority}
-              defaultChecked={priority.priority === checkedBox}
+              priority={priority}
+              defaultChecked={priority === checkedBox}
               onSetCheckbox={handleChangeCheckbox}
             />
           ))}
         </div>
       </form>
       <div className="extended-controls">
-        <TaskButton onClick={onToggleEdit} priorityObj={priorityObj}>
+        <TaskButton onClick={onToggleEdit} priority={taskPriority}>
           ↩️
         </TaskButton>
-        <TaskButton form={`edit-form--${taskId}`} priorityObj={priorityObj}>
+        <TaskButton form={`edit-form--${taskId}`} priority={taskPriority}>
           🆗
         </TaskButton>
       </div>

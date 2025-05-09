@@ -1,33 +1,28 @@
 export default function RadioButton({
   taskId,
-  priorityData,
+  priority,
   defaultChecked,
   onSetCheckbox,
 }) {
-  const { priority: priorityName, priorityMain: priorityColor } = priorityData;
-
-  const styleRadio = {
-    borderColor: priorityColor,
-  };
+  let customRadio = `custom-radio custom-radio--${priority}`;
 
   if (defaultChecked) {
-    styleRadio.backgroundColor = priorityColor;
+    customRadio += ` custom-radio--checked-${priority}`;
   }
 
   return (
     <div className="edit-form__styled-radio">
       <input
-        id={`priority-${priorityName}--${taskId}`}
+        id={`priority-${priority}--${taskId}`}
         name={`taskPriority--${taskId}`}
         type="radio"
-        value={`${priorityName}`}
+        value={`${priority}`}
         defaultChecked={defaultChecked}
-        onChange={() => onSetCheckbox(priorityName)}
+        onChange={() => onSetCheckbox(priority)}
       />
       <label
-        htmlFor={`priority-${priorityName}--${taskId}`}
-        className="custom-radio"
-        style={styleRadio}
+        htmlFor={`priority-${priority}--${taskId}`}
+        className={customRadio}
       ></label>
     </div>
   );
