@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Modal from "../UI/Modal";
@@ -12,7 +12,12 @@ export default function NewTask({ ref }) {
 
   const [checkedRadio, setCheckedRadio] = useState("none");
 
+  const testRef = useRef();
+
   function closeModal() {
+    testRef.current.reset();
+    setCheckedRadio("none");
+
     ref.current.close();
   }
 
@@ -23,8 +28,6 @@ export default function NewTask({ ref }) {
     const newTask = { ...data, taskId: randomId, isComplete };
 
     dispatch(addTask(newTask));
-
-    closeModal();
   }
 
   function submitForm(e) {
@@ -41,6 +44,8 @@ export default function NewTask({ ref }) {
     addNewTask({ taskTitle, taskDescription, taskPriority });
 
     e.target.reset();
+
+    closeModal();
   }
 
   return (
@@ -50,7 +55,7 @@ export default function NewTask({ ref }) {
           <h3>Create new task</h3>
         </div>
         <div className="add-task__main">
-          <form id="add-task-form" onSubmit={submitForm}>
+          <form id="add-task-form" onSubmit={submitForm} ref={testRef}>
             <label htmlFor="taskTitle">Enter task name:</label>
             <input
               name="taskTitle"
@@ -73,17 +78,17 @@ export default function NewTask({ ref }) {
                   <RadioCard
                     key={priority}
                     priorityName={priority}
-                    isChecked={checkedRadio === "none"}
+                    isChecked={checkedRadio === priority}
                     onCheckedRadio={setCheckedRadio}
                   />
                 );
               })}
             </ul>
             <div className="add-task__controls">
-              <button onClick={closeModal}>Cancel</button>
-              <button type="submit" form="add-task-form">
-                Confirm
+              <button type="button" onClick={closeModal}>
+                Cancel
               </button>
+              <button type="submit">Confirm</button>
             </div>
           </form>
         </div>

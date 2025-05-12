@@ -22,6 +22,12 @@ const tasksListSlice = createSlice({
       return state.filter((task) => !task.isCompleted);
     },
 
+    // CLEAR ALL SELECTED TASKS
+    clearAllSelectedTasks: (state, action) => {
+      const deleteIdArr = action.payload;
+      return state.filter((task) => !deleteIdArr.includes(task.taskId));
+    },
+
     // COMPLETE/UNCOMPLETE TASK
     toggleCompleteTask: (state, action) => {
       return state.map((listItem) =>
@@ -50,6 +56,7 @@ export const {
   addTask,
   clearAllTasks,
   clearAllCompletedTasks,
+  clearAllSelectedTasks,
   toggleCompleteTask,
   deleteTask,
   editTask,

@@ -1,8 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleCompleteTask } from "../../../store/tasksListSlice";
 
 export default function TaskMain({ onToggleExpand, task }) {
   const dispatch = useDispatch();
+
+  const selectDelete = useSelector((state) => state.selectToDelete);
 
   const { taskTitle, isCompleted, taskId, taskPriority } = task;
 
@@ -16,8 +18,18 @@ export default function TaskMain({ onToggleExpand, task }) {
 
   return (
     <div className="list-item--main">
-      {/* FOR SELECT TO DELETE */}
-      {/* {selectDelete && <button style={styleBtn}></button>} */}
+      {selectDelete && (
+        <div>
+          <input
+            form="select-delete-form"
+            name="delete-checkbox"
+            id={`checkbox-${taskId}`}
+            type="checkbox"
+            value={taskId}
+          ></input>
+          <label htmlFor={`checkbox-${taskId}`}></label>
+        </div>
+      )}
 
       <button
         className={taskBtn}
