@@ -52,8 +52,6 @@ export default function TodoNav() {
   function deleteSelected(e) {
     e.preventDefault();
 
-    console.log("delete");
-
     const formData = new FormData(e.target);
 
     const selectedCheckboxes = formData.getAll("delete-checkbox");
@@ -69,30 +67,56 @@ export default function TodoNav() {
       {!selectDelete && (
         <nav className="todo-navigation">
           <li>
-            <button onClick={handleOpenAddTaskModal}>Add Task</button>
+            <button
+              onClick={handleOpenAddTaskModal}
+              className="todo-navigation__button"
+            >
+              Add Task
+            </button>
           </li>
           <li>
-            <button onClick={() => dispatch(toggleSelectToDelete())}>
+            <button
+              onClick={() => dispatch(toggleSelectToDelete())}
+              className="todo-navigation__button"
+            >
               Select to delete
             </button>
           </li>
           <li>
-            <button onClick={handleClearAllCompleted}>
+            <button
+              onClick={handleClearAllCompleted}
+              className="todo-navigation__button"
+            >
               Clear All finished
             </button>
           </li>
           <li>
-            <button onClick={handleClearAll}>Clear All</button>
+            <button
+              onClick={handleClearAll}
+              className="todo-navigation__button"
+            >
+              Clear All
+            </button>
           </li>
         </nav>
       )}
 
       {selectDelete && (
-        <form id="select-delete-form" onSubmit={deleteSelected}>
-          <button type="button" onClick={handleCancelSelect}>
+        <form
+          id="select-delete-form"
+          onSubmit={deleteSelected}
+          className="todo-navigation"
+        >
+          <button
+            type="button"
+            onClick={handleCancelSelect}
+            className="todo-navigation__button"
+          >
             Cancel
           </button>
-          <button type="submit">Delete</button>
+          <button type="submit" className="todo-navigation__button">
+            Delete
+          </button>
         </form>
       )}
     </>

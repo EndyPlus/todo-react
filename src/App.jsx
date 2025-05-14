@@ -15,7 +15,5 @@ export default function App() {
 
 /*
 TODO: 
-1) Update navigation;
-2) Change & polish styles everywhere it possible/needble;
-3) Adaptive layout;
+1) Adaptive layout;
 */

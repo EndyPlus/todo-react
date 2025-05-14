@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCompleteTask } from "../../../store/tasksListSlice";
+import Checkbox from "../../UI/Checkbox";
 
 export default function TaskMain({ onToggleExpand, task }) {
   const dispatch = useDispatch();
@@ -19,25 +20,28 @@ export default function TaskMain({ onToggleExpand, task }) {
   return (
     <div className="list-item--main">
       {selectDelete && (
-        <div>
-          <input
-            form="select-delete-form"
-            name="delete-checkbox"
-            id={`checkbox-${taskId}`}
-            type="checkbox"
-            value={taskId}
-          ></input>
-          <label htmlFor={`checkbox-${taskId}`}></label>
-        </div>
+        <>
+          <Checkbox id={taskId} />
+          <label htmlFor={`checkbox-${taskId}`} className="text-control">
+            <p className={taskDesc}>{taskTitle}</p>
+          </label>
+        </>
       )}
 
-      <button
-        className={taskBtn}
-        onClick={() => dispatch(toggleCompleteTask(taskId))}
-      ></button>
-      <div className="text-control" onClick={onToggleExpand}>
-        <p className={taskDesc}>{taskTitle}</p>
-      </div>
+      {!selectDelete && (
+        <>
+          <button
+            className={taskBtn}
+            onClick={() => dispatch(toggleCompleteTask(taskId))}
+          ></button>
+          <div
+            className="text-control"
+            onClick={selectDelete ? null : onToggleExpand}
+          >
+            <p className={taskDesc}>{taskTitle}</p>
+          </div>
+        </>
+      )}
     </div>
   );
 }

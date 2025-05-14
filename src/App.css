@@ -45,7 +45,7 @@ main {
 
   margin: 10vh 0;
 
-  width: 50vw;
+  width: 70vw;
 }
 
 .todo-navigation {
@@ -54,8 +54,6 @@ main {
 
   justify-content: space-around;
   align-items: center;
-
-  border-bottom: 0.1rem var(--accent-color) solid;
 
   text-transform: uppercase;
 }
@@ -79,7 +77,7 @@ main {
   color: var(--accent-brighter);
 }
 
-.todo-navigation li button {
+.todo-navigation__button {
   font-size: 1.2rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
@@ -89,7 +87,7 @@ main {
   background-color: var(--main-darker);
 
   border: var(--default-border);
-  border-radius: 1rem;
+  border-radius: 0.6rem;
 
   transition: var(--default-transition);
 
@@ -97,13 +95,13 @@ main {
   text-transform: inherit;
 }
 
-.todo-navigation li button:hover {
+.todo-navigation__button:hover {
   background-color: var(--main-brighter);
   color: var(--accent-brighter);
   border-color: var(--accent-color);
 }
 
-.todo-navigation li button:active {
+.todo-navigation__button:active {
   background-color: var(--accent-darker);
   color: var(--main-darker);
   border-color: var(--accent-brighter);
@@ -117,12 +115,17 @@ main {
 }
 
 .list-heading {
-  margin: 0.5rem 0;
+  padding: 1rem 0;
   text-align: center;
 
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent-color);
+  color: var(--accent-brighter);
+  background-color: var(--main-brighter);
+
+  border: 0.2rem transparent solid;
+  border-bottom-color: var(--accent-darker);
+  border-top-color: var(--accent-darker);
 }
 
 .todo-container ul {
@@ -176,6 +179,33 @@ main {
   align-items: center;
 }
 
+.delete-form__input {
+  display: none;
+}
+
+.list-item--main button,
+.delete-form__checkbox {
+  margin: 1rem 0.3rem 1rem 1.3rem;
+}
+
+.delete-form__checkbox {
+  display: flex;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border: 0.2rem cornflowerblue solid;
+  border-radius: 0.1rem;
+
+  transition: var(--default-transition);
+
+  cursor: pointer;
+}
+
+.delete-form__input:checked + .delete-form__checkbox {
+  background-color: cornflowerblue;
+}
+
 .list-item--main button {
   display: flex;
   flex-shrink: 0;
@@ -183,8 +213,6 @@ main {
   height: 1.5rem;
 
   border-radius: 100%;
-
-  margin: 1rem 0.5rem 1rem 1rem;
 
   border: 0.2rem var(--accent-color) solid;
 }
@@ -839,4 +867,74 @@ dialog::backdrop {
 
 #add-task-form button[type="submit"] {
   font-size: 1.2rem;
+}
+
+.confirm-delete__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  border: var(--default-border);
+
+  width: 30vw;
+  height: 30vh;
+
+  padding: 2rem 0;
+
+  background-color: var(--main-brighter);
+}
+
+.confirm-delete__container h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  color: var(--accent-color);
+
+  text-transform: uppercase;
+
+  transition: var(--default-transition);
+}
+
+.confirm-delete__controls {
+  display: flex;
+  gap: 2rem;
+  align-self: end;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.confirm-delete__controls button {
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+
+  color: var(--accent-brighter);
+  border: var(--default-border);
+  background-color: var(--main-darker);
+
+  text-transform: uppercase;
+
+  transition: var(--default-transition);
+}
+
+.confirm-delete__controls button:hover {
+  background-color: var(--main-color);
+  color: var(--accent-color);
+}
+
+.confirm-delete__container:has(
+    .confirm-delete__controls button:first-child:hover
+  )
+  h3 {
+  color: var(--low-difficult-color);
+}
+
+.confirm-delete__container:has(
+    .confirm-delete__controls button:last-child:hover
+  )
+  h3 {
+  color: var(--high-difficult-color);
 }

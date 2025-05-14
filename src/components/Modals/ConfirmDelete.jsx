@@ -13,9 +13,13 @@ export default function ConfirmDelete({ ref, deleteFunction }) {
 
   return (
     <Modal ref={ref}>
-      Are u sure?
-      <button onClick={closeModal}>No</button>
-      <button onClick={confirmDeleting}>Yes</button>
+      <div className="confirm-delete__container">
+        <h3>Are you sure?</h3>
+        <div className="confirm-delete__controls">
+          <button onClick={closeModal}>No</button>
+          <button onClick={confirmDeleting}>Yes</button>
+        </div>
+      </div>
     </Modal>
   );
 }

@@ -15,6 +15,9 @@ export default function TodoTasks() {
       {finishedTasksList.length ? (
         <TasksList title="Finished tasks" taskList={finishedTasksList} />
       ) : null}
+      {!actualTasksList.length && !finishedTasksList.length && (
+        <h2 className="list-heading">There are no tasks yet...</h2>
+      )}
     </div>
   );
 }

@@ -31,6 +31,7 @@ export default function TaskInfo({ data, onToggleEdit, onToggleExpand }) {
       <h2 className={extendedInfoHeading} onClick={onToggleExpand}>
         {taskTitle}
       </h2>
+
       <h3>
         Priority:{" "}
         <span
@@ -39,13 +40,16 @@ export default function TaskInfo({ data, onToggleEdit, onToggleExpand }) {
           {taskPriority}
         </span>
       </h3>
+
       <h3>
         Status:{" "}
         <span className={statusSpan}>
           {isCompleted ? "Completed" : "Uncompleted"}
         </span>
       </h3>
-      <p>{taskDescription}</p>
+
+      {taskDescription && <p>{taskDescription}</p>}
+
       <div className="extended-controls">
         <TaskButton onClick={onToggleExpand} priority={taskPriority}>
           ❌

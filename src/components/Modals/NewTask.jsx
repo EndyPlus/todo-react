@@ -68,8 +68,7 @@ export default function NewTask({ ref }) {
             <textarea
               name="taskDescription"
               id="taskDescription"
-              placeholder="Describe your task..."
-              required
+              placeholder="Describe your task... (optional)"
             />
             <h3>Select priority:</h3>
             <ul>

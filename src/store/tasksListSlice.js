@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { DUMMY_TASKS } from "../data/tasks";
+// import { updateLocalTasksStorage } from "../utils/updateLocalTasksStorage";
 
-const initialState = DUMMY_TASKS;
+let initialState;
+
+if (JSON.parse(localStorage.getItem("tasks")) !== null) {
+  initialState = JSON.parse(localStorage.getItem("tasks"));
+} else {
+  initialState = DUMMY_TASKS;
+}
 
 const tasksListSlice = createSlice({
   name: "tasksList",
@@ -12,42 +19,60 @@ const tasksListSlice = createSlice({
     // ADD NEW TASK
     addTask: (state, action) => {
       state.unshift(action.payload);
+      // updateLocalTasksStorage(state);
     },
 
     // CLEAR ALL TASKS
-    clearAllTasks: () => [],
+    clearAllTasks: () => {
+      // updateLocalTasksStorage([]);
+      return [];
+    },
 
     // CLEAR ALL COMPLETED TASKS
     clearAllCompletedTasks(state) {
-      return state.filter((task) => !task.isCompleted);
+      const newState = state.filter((task) => !task.isCompleted);
+      // updateLocalTasksStorage(newState);
+      return newState;
     },
 
     // CLEAR ALL SELECTED TASKS
     clearAllSelectedTasks: (state, action) => {
       const deleteIdArr = action.payload;
-      return state.filter((task) => !deleteIdArr.includes(task.taskId));
+      const newState = state.filter(
+        (task) => !deleteIdArr.includes(task.taskId)
+      );
+      // updateLocalTasksStorage(newState);
+      return newState;
     },
 
     // COMPLETE/UNCOMPLETE TASK
     toggleCompleteTask: (state, action) => {
-      return state.map((listItem) =>
+      const newState = state.map((listItem) =>
         listItem.taskId === action.payload
           ? { ...listItem, isCompleted: !listItem.isCompleted }
           : listItem
       );
+      // updateLocalTasksStorage(newState);
+      return newState;
     },
 
     // DELETE TASK
     deleteTask: (state, action) => {
-      return state.filter((listItem) => listItem.taskId !== action.payload);
+      const newState = state.filter(
+        (listItem) => listItem.taskId !== action.payload
+      );
+      // updateLocalTasksStorage(newState);
+      return newState;
     },
 
     // EDIT TASK
     editTask: (state, action) => {
       const newTaskData = action.payload;
-      return state.map((listItem) =>
+      const newState = state.map((listItem) =>
         listItem.taskId === newTaskData.taskId ? { ...newTaskData } : listItem
       );
+      // updateLocalTasksStorage(newState);
+      return newState;
     },
   },
 });
