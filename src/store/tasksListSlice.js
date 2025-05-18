@@ -13,7 +13,6 @@ if (JSON.parse(localStorage.getItem("tasks")) !== null) {
 
 const tasksListSlice = createSlice({
   name: "tasksList",
-  // initialState: initialState,
   initialState,
   reducers: {
     // ADD NEW TASK

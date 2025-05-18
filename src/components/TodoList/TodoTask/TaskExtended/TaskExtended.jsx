@@ -2,7 +2,7 @@ import { useState } from "react";
 import TaskInfo from "./TaskInfo";
 import TaskEdit from "./TaskEdit";
 
-export default function TaskExtended({ onToggleExpand, task }) {
+export default function TaskExtended({ task }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function toggleEdit() {
@@ -11,13 +11,7 @@ export default function TaskExtended({ onToggleExpand, task }) {
 
   return (
     <div className="list-item--extended">
-      {!isEditing && (
-        <TaskInfo
-          data={task}
-          onToggleEdit={toggleEdit}
-          onToggleExpand={onToggleExpand}
-        />
-      )}
+      {!isEditing && <TaskInfo data={task} onToggleEdit={toggleEdit} />}
       {isEditing && <TaskEdit data={task} onToggleEdit={toggleEdit} />}
     </div>
   );

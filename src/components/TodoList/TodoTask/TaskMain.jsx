@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { toggleCompleteTask } from "../../../store/tasksListSlice";
 import Checkbox from "../../UI/Checkbox";
+import { setExpandedTask } from "../../../store/expandTaskSlice";
 
-export default function TaskMain({ onToggleExpand, task, selectDelete }) {
+export default function TaskMain({ task, selectDelete }) {
   const dispatch = useDispatch();
 
   const { taskTitle, isCompleted, taskId, taskPriority } = task;
@@ -34,7 +35,9 @@ export default function TaskMain({ onToggleExpand, task, selectDelete }) {
           ></button>
           <div
             className="text-control"
-            onClick={selectDelete ? null : onToggleExpand}
+            onClick={() =>
+              selectDelete ? null : dispatch(setExpandedTask(taskId))
+            }
           >
             <p className={taskDesc}>{taskTitle}</p>
           </div>

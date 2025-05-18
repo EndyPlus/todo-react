@@ -9,6 +9,7 @@ import {
 } from "../../store/tasksListSlice";
 import { toggleSelectToDelete } from "../../store/selectToDeleteSlice";
 import ConfirmDelete from "../Modals/ConfirmDelete";
+import { unsetExpandedTask } from "../../store/expandTaskSlice";
 
 export default function TodoNav() {
   const [deleteFn, setDeleteFn] = useState();
@@ -21,6 +22,7 @@ export default function TodoNav() {
   const confirmDeleteDialog = useRef();
 
   function handleOpenAddTaskModal() {
+    dispatch(unsetExpandedTask());
     newTaskDialog.current.showModal();
   }
 

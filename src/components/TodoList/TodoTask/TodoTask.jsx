@@ -1,39 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TaskExtended from "./TaskExtended/TaskExtended";
 import TaskMain from "./TaskMain";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setExpandedTask } from "../../../store/expandTaskSlice";
 
 export default function TodoTask({ task }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const dispatch = useDispatch();
+
   const selectDelete = useSelector((state) => state.selectToDelete);
+  const expandedTask = useSelector((state) => state.expandTask);
 
   useEffect(() => {
-    if (selectDelete) {
-      setIsExpanded(false);
+    if (selectDelete && expandedTask !== null) {
+      dispatch(setExpandedTask(null));
     }
-  }, [selectDelete]);
+  }, [dispatch, selectDelete, expandedTask]);
 
-  function toggleExpanded() {
-    setIsExpanded((prevState) => !prevState);
-  }
+  const isExpanded = expandedTask === task.taskId;
 
   return (
     <li className="list-item">
-      {!isExpanded && (
-        <TaskMain
-          onToggleExpand={toggleExpanded}
-          task={task}
-          selectDelete={selectDelete}
-        />
-      )}
+      {!isExpanded && <TaskMain task={task} selectDelete={selectDelete} />}
 
-      {isExpanded && (
-        <TaskExtended
-          task={task}
-          onToggleExpand={toggleExpanded}
-          selectDelete={selectDelete}
-        />
-      )}
+      {isExpanded && <TaskExtended task={task} />}
     </li>
   );
 }

@@ -4,16 +4,25 @@ import {
   toggleCompleteTask,
 } from "../../../../store/tasksListSlice";
 import TaskButton from "../../../UI/TaskButton";
+import { unsetExpandedTask } from "../../../../store/expandTaskSlice";
 
-export default function TaskInfo({ data, onToggleEdit, onToggleExpand }) {
+export default function TaskInfo({ data, onToggleEdit }) {
   const dispatch = useDispatch();
 
   const { taskTitle, taskDescription, isCompleted, taskId, taskPriority } =
     data;
 
+  function handleUnsetExpand() {
+    dispatch(unsetExpandedTask());
+  }
+
   function handleComplete() {
     dispatch(toggleCompleteTask(taskId));
-    onToggleExpand();
+    handleUnsetExpand();
+  }
+
+  function handleDeleteTask() {
+    dispatch(deleteTask(taskId));
   }
 
   let extendedInfoHeading = `extended-info__heading--${taskPriority}`;
@@ -28,7 +37,7 @@ export default function TaskInfo({ data, onToggleEdit, onToggleExpand }) {
 
   return (
     <div className="extended-info">
-      <h2 className={extendedInfoHeading} onClick={onToggleExpand}>
+      <h2 className={extendedInfoHeading} onClick={handleUnsetExpand}>
         {taskTitle}
       </h2>
 
@@ -51,13 +60,10 @@ export default function TaskInfo({ data, onToggleEdit, onToggleExpand }) {
       {taskDescription && <p>{taskDescription}</p>}
 
       <div className="extended-controls">
-        <TaskButton onClick={onToggleExpand} priority={taskPriority}>
+        <TaskButton onClick={handleUnsetExpand} priority={taskPriority}>
           ❌
         </TaskButton>
-        <TaskButton
-          onClick={() => dispatch(deleteTask(taskId))}
-          priority={taskPriority}
-        >
+        <TaskButton onClick={handleDeleteTask} priority={taskPriority}>
           🗑️
         </TaskButton>
         {!isCompleted && (
