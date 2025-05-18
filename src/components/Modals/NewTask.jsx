@@ -6,16 +6,17 @@ import RadioCard from "../UI/RadioCard";
 
 import { addTask } from "../../store/tasksListSlice";
 import { PRIORITIES } from "../../data/priorities";
+import { nanoid } from "nanoid";
 
 export default function NewTask({ ref }) {
   const dispatch = useDispatch();
 
   const [checkedRadio, setCheckedRadio] = useState("none");
 
-  const testRef = useRef();
+  const addTaskFormRef = useRef();
 
   function closeModal() {
-    testRef.current.reset();
+    addTaskFormRef.current.reset();
     setCheckedRadio("none");
 
     ref.current.close();
@@ -23,7 +24,8 @@ export default function NewTask({ ref }) {
 
   function addNewTask(data) {
     const isComplete = false;
-    const randomId = crypto.randomUUID();
+
+    const randomId = nanoid();
 
     const newTask = { ...data, taskId: randomId, isComplete };
 
@@ -55,7 +57,7 @@ export default function NewTask({ ref }) {
           <h3>Create new task</h3>
         </div>
         <div className="add-task__main">
-          <form id="add-task-form" onSubmit={submitForm} ref={testRef}>
+          <form id="add-task-form" onSubmit={submitForm} ref={addTaskFormRef}>
             <label htmlFor="taskTitle">Enter task name:</label>
             <input
               name="taskTitle"

@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleCompleteTask } from "../../../store/tasksListSlice";
 import Checkbox from "../../UI/Checkbox";
 
-export default function TaskMain({ onToggleExpand, task }) {
+export default function TaskMain({ onToggleExpand, task, selectDelete }) {
   const dispatch = useDispatch();
-
-  const selectDelete = useSelector((state) => state.selectToDelete);
 
   const { taskTitle, isCompleted, taskId, taskPriority } = task;
 

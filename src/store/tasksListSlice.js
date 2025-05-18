@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { DUMMY_TASKS } from "../data/tasks";
-// import { updateLocalTasksStorage } from "../utils/updateLocalTasksStorage";
+import { updateLocalTasksStorage } from "../utils/updateLocalTasksStorage";
 
 let initialState;
 
@@ -19,19 +19,19 @@ const tasksListSlice = createSlice({
     // ADD NEW TASK
     addTask: (state, action) => {
       state.unshift(action.payload);
-      // updateLocalTasksStorage(state);
+      updateLocalTasksStorage(state);
     },
 
     // CLEAR ALL TASKS
     clearAllTasks: () => {
-      // updateLocalTasksStorage([]);
+      updateLocalTasksStorage([]);
       return [];
     },
 
     // CLEAR ALL COMPLETED TASKS
     clearAllCompletedTasks(state) {
       const newState = state.filter((task) => !task.isCompleted);
-      // updateLocalTasksStorage(newState);
+      updateLocalTasksStorage(newState);
       return newState;
     },
 
@@ -41,7 +41,7 @@ const tasksListSlice = createSlice({
       const newState = state.filter(
         (task) => !deleteIdArr.includes(task.taskId)
       );
-      // updateLocalTasksStorage(newState);
+      updateLocalTasksStorage(newState);
       return newState;
     },
 
@@ -52,7 +52,7 @@ const tasksListSlice = createSlice({
           ? { ...listItem, isCompleted: !listItem.isCompleted }
           : listItem
       );
-      // updateLocalTasksStorage(newState);
+      updateLocalTasksStorage(newState);
       return newState;
     },
 
@@ -61,7 +61,7 @@ const tasksListSlice = createSlice({
       const newState = state.filter(
         (listItem) => listItem.taskId !== action.payload
       );
-      // updateLocalTasksStorage(newState);
+      updateLocalTasksStorage(newState);
       return newState;
     },
 
@@ -71,7 +71,7 @@ const tasksListSlice = createSlice({
       const newState = state.map((listItem) =>
         listItem.taskId === newTaskData.taskId ? { ...newTaskData } : listItem
       );
-      // updateLocalTasksStorage(newState);
+      updateLocalTasksStorage(newState);
       return newState;
     },
   },

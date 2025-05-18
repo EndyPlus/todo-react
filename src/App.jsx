@@ -12,8 +12,3 @@ export default function App() {
     </>
   );
 }
-
-/*
-TODO: 
-1) Adaptive layout;
-*/
